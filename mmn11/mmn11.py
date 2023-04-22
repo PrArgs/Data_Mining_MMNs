@@ -1,8 +1,6 @@
-import csv
 import time
 import numpy as np
 import pandas as pd 
-import os.path
 import re
 
 def __is_numeric(data_frame,column_index):
@@ -68,24 +66,6 @@ def __handle_duplicated_rows(data_frame, remove = False):
     else:
         print("\n There are no duplicated rows in the data frame \n")
             
-#finding the type of each column and save it in a dictionary
-def __find_type_of_columns(data_frame):
-    #create a dictionary to save the type of each column
-    columns_type = {}
-    for column in data_frame.columns:
-        if (__is_numeric(data_frame,column) == True):
-            columns_type[column] = "numeric"
-        elif (__is_string(data_frame,column) == True):
-            columns_type[column] = "string"
-        elif (__is_date(data_frame,column) == True):
-            columns_type[column] = "date"
-        elif (__is_boolean(data_frame,column) == True):
-            columns_type[column] = "boolean"
-        elif (__is_categorical(data_frame,column) == True):
-            columns_type[column] = "categorical"
-    return columns_type
-   
-
 #locating and removing noise values from the data frame if asked
 def __noise_cnacletion(data_frame, remove = False):
     # retun not implimented error for now
@@ -201,8 +181,6 @@ def __missing_values_cnacletion(data_frame, handle = False):
     # print("\n\n")
     # time.sleep(2)
     return __missing_values_handler(data_frame,missing_values_index,handle)
-    
-    
 
 #locating and handling ubnormal values from the data frame if asked
 def __ubnormal_values_cnacletion(data_frame, remove = False):
