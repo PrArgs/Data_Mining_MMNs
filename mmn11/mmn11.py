@@ -33,21 +33,22 @@ def __is_categorical(data_frame,column_index):
     
 # emporting the data and assign it to be a type data frame
 
+startData = pd.read_excel("mmn11_data.xlex", encoding='utf-8')
 Data = pd.read_csv("mmn11_data.csv" , encoding='utf-8')
 
 #Ready the data to be printed only when needed.
 def __print_data(Data):
-    pd.options.mode.chained_assignment = None  # default='warn'
     #copy the data frame
     Data = Data.copy()
     #reverse the order of the columns
     #Revers hebrew string in each cell
     for column in Data.columns:
         for i in range(len(Data[column])):
+            print(Data[column][i])
             val = Data[column][i]
             if (type(val) == str) and (re.search(r'[א-ת]+', val)):                
                 Data.at[i ,column] = val[::-1]    
-    return Data
+    print(Data)
 
 #Clean the data and reduce the dimentionality of the data frame
 
@@ -208,11 +209,14 @@ def __ubnormal_values_cnacletion(data_frame, remove = False):
 def clean_data(data_frame, remove = False):
     #Print the data 
     print("\n this is the initial data frame: \n")
-    print(__print_data(Data))
-    time.sleep(2)
-    __handle_duplicated_rows(data_frame, remove)
-    #__noise_cnacletion(data_frame, remove)    
-    __missing_values_cnacletion(data_frame, remove)
+    print(__print_data(data_frame))
+    print("I'm here")
+    # data_frame = data_frame.interpolate()
+    # print(__print_data(data_frame))
+    # time.sleep(2)
+    # __handle_duplicated_rows(data_frame, remove)
+    # #__noise_cnacletion(data_frame, remove)    
+    # __missing_values_cnacletion(data_frame, remove)
 
 #Clean the data and show the process
 clean_data(Data, False)
